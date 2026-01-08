@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Démonstration SNT – Données visibles</title>
+
+    <!-- IMPORTANT pour téléphone -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Démonstration SNT</h1>
+
+    <p>
+        Vous avez cliqué volontairement sur le lien.<br>
+        Les informations ci-dessous sont celles qu’un site web peut voir.
+    </p>
+
+    <ul>
+        <li id="ip">Adresse IP : chargement...</li>
+        <li id="nav">Navigateur : chargement...</li>
+        <li id="lang">Langue : chargement...</li>
+        <li id="screen">Résolution écran : chargement...</li>
+    </ul>
+
+    <p style="color:gray;">
+        Aucune donnée n’est enregistrée. Affichage uniquement.
+    </p>
+
+    <script>
+        // Adresse IP publique (avec gestion d’erreur)
+        fetch("https://api.ipify.org?format=json")
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById("ip").textContent =
+                    "Adresse IP : " + d.ip;
+            })
+            .catch(() => {
+                document.getElementById("ip").textContent =
+                    "Adresse IP : non disponible (bloquée ou hors ligne)";
+            });
+
+        // Navigateur
+        document.getElementById("nav").textContent =
+            "Navigateur : " + navigator.userAgent;
+
+        // Langue
+        document.getElementById("lang").textContent =
+            "Langue : " + navigator.language;
+
+        // Écran
+        document.getElementById("screen").textContent =
+            "Résolution écran : " + screen.width + " x " + screen.height;
+    </script>
+</body>
+</html>
